@@ -59,11 +59,10 @@ ul {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.3);
-  z-index: 999;
+  z-index: 990;
   overflow: auto;
   display: none;
   text-align: center;
-  border-radius: 5px;
 }
 
 .modal {
@@ -110,6 +109,22 @@ ul {
   display: inline-block;
 }
 
-#modal-container.is-visible {
+#loading-container {
+  position: fixed;
+  padding: 20px;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 999;
+  overflow: auto;
+  display: none;
+  text-align: center;
+}
+
+#modal-container.is-visible,
+#loading-container.is-visible {
   display: grid;
 }

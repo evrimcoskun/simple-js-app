@@ -1,8 +1,20 @@
 var pokemonRepository = (function() {
   var pokemonList = [];
   var apiUrl = 'https://pokeapi.co/api/v2/pokemon/';
+  var loadingContainer = document.querySelector('#loading-container');
   var modalContainer = document.querySelector('#modal-container');
-
+  var loadingImg = document.createElement('img');
+  loadingImg.src = './images/loading.svg';
+  loadingContainer.appendChild(loadingImg);
+  
+  function showLoading() {
+    loadingContainer.classList.add('is-visible');
+  }
+  
+  function hideLoading() {
+    loadingContainer.classList.remove('is-visible');
+  }
+  
   function getAll() {
     return pokemonList;
   }
@@ -25,6 +37,7 @@ var pokemonRepository = (function() {
   }
 
   function loadList() {
+    showLoading();
     return fetch(apiUrl).then(function (response) {
       return response.json();
     }).then(function (json) {
@@ -35,6 +48,8 @@ var pokemonRepository = (function() {
         };
         add(pokemon);
       });
+    }).then(function() {
+      hideLoading();
     }).catch(function (e) {
       console.error(e);
     })
