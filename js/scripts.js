@@ -5,7 +5,11 @@ var pokemonRepository = (function() {
   var modalContainer = document.querySelector('#modal-container');
   var loadingImg = document.createElement('img');
   loadingImg.src = './images/loading.svg';
-  loadingContainer.appendChild(loadingImg);
+  var loading = document.createElement('div');
+  loading.classList.add('loading');
+  loading.appendChild(loadingImg);
+  loadingContainer.appendChild(loading);
+  
   
   function showLoading() {
     loadingContainer.classList.add('is-visible');
@@ -57,11 +61,14 @@ var pokemonRepository = (function() {
   
   function loadDetails(pokemon) {
     var url = pokemon.detailsUrl;
+    showLoading();
     return fetch(url).then(function (response) {
       return response.json();
     }).then(function (details) {
       pokemon.imageUrl = details.sprites.front_default;
       pokemon.height = details.height;
+    }).then(function() {
+      hideLoading();
     }).catch(function (e) {
       console.error(e);
     });
